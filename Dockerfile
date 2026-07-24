@@ -1,5 +1,5 @@
 # Build stage
-FROM gradle:8.4-jdk21 as builder
+FROM gradle:8.4-jdk21 AS builder
 
 WORKDIR /build
 
