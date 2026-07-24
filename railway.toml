@@ -3,6 +3,6 @@ builder = "dockerfile"
 dockerfilePath = "Dockerfile"
 
 [deploy]
-startCommand = "java -Xmx512m -Xms256m -jar Lavalink.jar"
+startCommand = "java -Xmx512m -Xms256m -jar /opt/Lavalink/Lavalink.jar"
+restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 5
-restartPolicyWindowSeconds = 600
