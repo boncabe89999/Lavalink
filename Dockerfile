@@ -3,10 +3,12 @@ FROM gradle:8.4-jdk21 AS builder
 
 WORKDIR /build
 
-# Copy source code (including .git directory for git properties)
+# Copy source code
 COPY . .
 
-RUN gradle build -x test --no-daemon
+# Skip git properties generation in Docker by setting environment variable
+# gradle-git-properties will skip if .git doesn't exist after we handle it
+RUN gradle build -x test --no-daemon -Dorg.gradle.project.skipGitInfo=true
 
 # Runtime stage
 FROM eclipse-temurin:21-jre-jammy
