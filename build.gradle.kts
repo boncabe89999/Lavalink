@@ -20,6 +20,17 @@ plugins {
 val (gitVersion, release) = versionFromGit()
 logger.lifecycle("Version: $gitVersion (release: $release)")
 
+// Gracefully handle missing .git (Railway / Docker builds)
+if (File(rootDir, ".git").exists()) {
+    configure<com.gorylenko.GitPropertiesPluginExtension> {
+        failOnNoGitDirectory = false
+    }
+} else {
+    tasks.matching { it.name == "generateGitProperties" }.configureEach {
+        enabled = false
+    }
+}
+
 allprojects {
     group = "lavalink"
     version = gitVersion

@@ -13,7 +13,7 @@ plugins {
 }
 
 apply(plugin = "org.springframework.boot")
-if (!project.hasProperty("skipGitInfo")) {
+if (File(rootDir, ".git").exists()) {
     apply(plugin = "com.gorylenko.gradle-git-properties")
     apply(plugin = "org.ajoberstar.grgit")
 }
