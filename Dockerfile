@@ -1,14 +1,16 @@
 # Build stage
-FROM gradle:8.4-jdk21 AS builder
+FROM gradle:8.4-jdk17 AS builder
 
 WORKDIR /build
 
 COPY . .
 
-RUN ./gradlew build -x test --no-daemon -Dorg.gradle.project.skipGitInfo=true
+RUN ./gradlew build -x test --no-daemon \
+    -Dorg.gradle.project.skipGitInfo=true \
+    -Porg.gradle.java.installations.auto-download=false
 
 # Runtime stage
-FROM eclipse-temurin:21-jre-jammy
+FROM eclipse-temurin:17-jre-jammy
 
 WORKDIR /opt/Lavalink
 
