@@ -3,6 +3,7 @@ FROM gradle:8.4-jdk21 AS builder
 
 WORKDIR /build
 
+# Copy source code (including .git directory for git properties)
 COPY . .
 
 RUN gradle build -x test --no-daemon
