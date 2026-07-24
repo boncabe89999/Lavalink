@@ -5,7 +5,7 @@ WORKDIR /build
 
 COPY . .
 
-RUN ./gradlew build -x test --no-daemon \
+RUN ./gradlew :Lavalink-Server:build -x test -x allTests -x jsBrowserTest --no-daemon \
     -Dorg.gradle.project.skipGitInfo=true \
     -Porg.gradle.java.installations.auto-download=false
 
